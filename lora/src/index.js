@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import sc from './socket';
 
-
-
+sc.init();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render( <App /> 

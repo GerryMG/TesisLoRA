@@ -16,6 +16,8 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+
+
     this.state = {
       ready: false
     }
@@ -23,8 +25,8 @@ class App extends React.Component {
 
   handleEvent(event, error) {
     console.log('on key cloak event', event, error);
-    if(event && event === "onReady" && keycloak.hasRealmRole("administratorLora") ){
-      this.setState({ready: true});
+    if (event && event === "onReady" && keycloak.hasRealmRole("administratorLora")) {
+      this.setState({ ready: true });
     }
   }
 
@@ -42,7 +44,7 @@ class App extends React.Component {
         {this.state.ready ?
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard  />} />
             </Routes>
           </BrowserRouter>
           :

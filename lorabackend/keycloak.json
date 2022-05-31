@@ -1,0 +1,10 @@
+{
+  "realm": "LoRa",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "external",
+  "resource": "BackendLora",
+  "credentials": {
+    "secret": "C4ZRAHTYhmqPMrZSfCKWiBEXJ0RR2qd8"
+  },
+  "confidential-port": 0
+}
