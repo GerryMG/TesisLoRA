@@ -124,7 +124,7 @@ io.on(disconnect, () => {
 });
 
 client.on('connect', function () {
-  console.log("connected to mosquitto");
+  console.log("connected to broker");
   sensor.find({}, (err, doc) => {
     if (err) {
       console.log("err: ", err);
