@@ -14,7 +14,7 @@ var session = require('express-session');
 var sensor = require("./models/sensors");
 var data = require("./models/data");
 var app = express();
-const {MQTT_USERNAME,MQTT_PASS,MQTT_URL} = require("./config");
+const {MQTT_USERNAME,MQTT_PASS,MQTT_URL,MQTT_PROTOCOL} = require("./config");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -38,17 +38,21 @@ app.use('/', indexRouter);
 app.use('/sensors', sensorRouter);
 app.use('/data', dataRouter);
 
-console.debug(`${MQTT_URL} ${MQTT_USERNAME} ${MQTT_PASS}`);
+console.debug(`${MQTT_URL} ${MQTT_PROTOCOL} ${MQTT_USERNAME} ${MQTT_PASS}`);
 const mqtt = require('mqtt');
-var client = mqtt.connect({
-  host: `${MQTT_URL.split(":")[0]}`,
-  port: MQTT_URL.split(":")[1],
-  username: MQTT_USERNAME,
-  password: MQTT_PASS,
 
-  protocol: "mqtts",
+var client = mqtt.connect({
+  host: MQTT_URL.split(":")[0],
+  port: MQTT_URL.split(":")[1],
+  // username: MQTT_USERNAME,
+  // password: MQTT_PASS,
+
+  protocol: MQTT_PROTOCOL,
   protocolVersion: 4,
 });
+
+// var client = mqtt.connect("mqtt://localhost:1883");
+
 
 
 

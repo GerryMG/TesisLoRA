@@ -28,7 +28,7 @@ class PageSensorsCreate extends React.Component {
                         onChange={this.props.handleChange}
                         value={this.props.sensor.name}
                     />
-                    <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    <TextField 
                         margin="dense"
                         id="id"
                         label="Id del Sensor"

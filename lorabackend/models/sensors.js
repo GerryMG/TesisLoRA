@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var sensorSchema = new Schema(
     {
         name: {type: String,require: true},
-        id: { type: Number, unique: true, require: true },
+        id: { type: String, unique: true, require: true },
         meta: { type: Object, require: true },
         topic: { type: String, required: true },
         access_key: { type: String },

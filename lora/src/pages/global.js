@@ -11,7 +11,7 @@ export const globalPages = {
 export const newSensor = {
     _id: null,
     name: "",
-    id: null,
+    id: "",
     meta: "",
     topic: "",
     access_key: "",
