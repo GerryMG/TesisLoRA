@@ -32,6 +32,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import { globalPages, globalTitles } from '../global';
 import PageSensors from '../sensors/sensors';
+import Graphics from '../reports/graphics'
 import { height } from '@mui/system';
 
 function Copyright(props) {
@@ -103,15 +104,32 @@ class DashboardContent extends React.Component {
     this.state = {
       open: true,
       title: globalTitles.sensor,
-      page: globalPages.sensors
+      page: globalPages.sensors,
+      sensor: null
     }
+    this.pageSensors = this.pageSensors.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.setPage = this.setPage.bind(this);
+    this.setTitle = this.setTitle.bind(this);
+    this.setSensors=this.setSensors.bind(this);
   }
 
+  pageSensors(id){
+    this.setPage(globalPages.reportSensor);
+    this.setState({sensor: id});
+  }
 
   toggleDrawer() {
     this.setState({ open: !this.state.open });
+  }
+
+  setTitle(title){
+    this.setState({title: title});
+  }
+
+  setSensors(){
+    this.setTitle(globalTitles.sensor);
+    this.setPage(globalPages.sensors);
   }
 
   setPage(page) {
@@ -120,7 +138,12 @@ class DashboardContent extends React.Component {
 
   renderPage(page) {
     if (page == globalPages.sensors) {
-      return (<PageSensors open={this.state.open} />);
+      return (<PageSensors
+        handleSensorPage={this.pageSensors} 
+        open={this.state.open} />);
+    }
+    if(page == globalPages.reportSensor){
+      return (<Graphics setTitle={this.setTitle} id={this.state.sensor}/>);
     }
   }
 
@@ -176,17 +199,11 @@ class DashboardContent extends React.Component {
             <Divider />
             <List component="nav">
               <React.Fragment>
-                <ListItemButton>
+                <ListItemButton onClick={this.setSensors}>
                   <ListItemIcon>
                     <SensorsIcon />
                   </ListItemIcon>
                   <ListItemText primary="Sensores" />
-                </ListItemButton>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <BarChartIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Reportes" />
                 </ListItemButton>
               </React.Fragment>
               <Divider sx={{ my: 1 }} />

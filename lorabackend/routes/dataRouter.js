@@ -10,6 +10,7 @@ router.post("/", data.create);
 router.delete("/", data.delete);
 router.put("/", data.update);
 router.put("/upsert", data.updateOrCreate);
+router.get("/bytime",data.getAllByTime);
 
 
 

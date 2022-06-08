@@ -44,8 +44,8 @@ const mqtt = require('mqtt');
 var client = mqtt.connect({
   host: MQTT_URL.split(":")[0],
   port: MQTT_URL.split(":")[1],
-  // username: MQTT_USERNAME,
-  // password: MQTT_PASS,
+  username: MQTT_USERNAME,
+  password: MQTT_PASS,
 
   protocol: MQTT_PROTOCOL,
   protocolVersion: 4,
@@ -111,9 +111,6 @@ function normalizePort(val) {
 
 var server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: ["http://127.0.0.1:3000"]
-  }
 });
 
 app.set("io", io);
@@ -123,7 +120,7 @@ io.on("connection", (socket) => {
   console.log("connnected a user");
 });
 
-io.on(disconnect, () => {
+io.on("disconnect", () => {
 
 });
 
@@ -145,17 +142,20 @@ client.on('connect', function () {
   });
 });
 
+
 client.on('message', function (topic, message) {
   // message is Buffer
   console.log(JSON.parse(message.toString()));
-  io.emit("message", JSON.parse(message.toString()));
+ 
   let aux = { data: JSON.parse(message.toString()) }
+  
   const newModel = new data(aux);
   newModel.save((err, doc) => {
     if (err) {
       console.log("err:", err)
 
     } else {
+      io.emit("message", doc);
       console.log(doc);
 
     }
@@ -203,9 +203,9 @@ function putLocation() {
 }
 
 
-setInterval(() => {
-  putLocation();
-}, 1000 * 60 * 10);
+// setInterval(() => {
+//   putLocation();
+// }, 1000 * 60 * 10);
 
 
 module.exports = server;

@@ -13,18 +13,12 @@ class sensorsController extends controller{
     create2(req, res){
         try {
             let auxmodel = req.body.model;
-            let kys = Object.keys(req.body.model.meta);
+            let kys = req.body.model.meta;
             let pass = false;
             kys.forEach(ele=>{
-                if(auxmodel.meta[ele].type == "id"){
-                    auxmodel.id_field = ele;
+                if(ele[1] == "id"){
+                    auxmodel.id_field = ele[0];
                     pass = true;
-                }
-                if(auxmodel.meta[ele].type == "latitud"){
-                    auxmodel.latitud = ele;
-                }
-                if(auxmodel.meta[ele].type == "longitud"){
-                    auxmodel.longitud = ele;
                 }
             });
             if(pass){

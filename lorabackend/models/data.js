@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var dataSchema = new Schema(
     {
         data: { type: Object, require: true },
-        time: {type: Date, default: Date.now()}
+        time: {type: Date, default: Date.now}
     }
 );
 

@@ -8,11 +8,8 @@ var sensorSchema = new Schema(
         id: { type: String, unique: true, require: true },
         meta: { type: Object, require: true },
         topic: { type: String, required: true },
-        access_key: { type: String },
-        access_token: { type: String },
+        // v3/{application id}@{tenant id}/devices/{device id}/up
         category: {type: String, require: true},
-        latitud: { type: String },
-        longitud: { type: String },
         latitud_value: { type: Number },
         longitud_value: { type: Number },
         id_field: { type: String },

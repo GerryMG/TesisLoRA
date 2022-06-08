@@ -4,8 +4,8 @@ export const globalTitles = {
 }
 export const globalPages = {
     sensors: 1,
-    sensorsCreation: 2,
-    sensorsMap: 3
+    reportSensor: 2
+    
 }
 
 export const newSensor = {
@@ -14,8 +14,8 @@ export const newSensor = {
     id: "",
     meta: "",
     topic: "",
-    access_key: "",
-    acces_token: "",
+    latitud_value: "",
+    longitud_value: "",
     category: ""
 }
 

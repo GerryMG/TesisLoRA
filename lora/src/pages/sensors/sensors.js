@@ -17,7 +17,8 @@ import IconButton from '@mui/material/IconButton';
 import PageSensorsCreate from './sensorCreate';
 import { newSensor, urls } from '../global';
 import PageSensorsMap from './sensorMaps';
-
+import TableChartIcon from '@mui/icons-material/TableChart';
+import { ConnectingAirportsOutlined } from '@mui/icons-material';
 const classes = {
     flexContainer: 'ReactVirtualizedDemo-flexContainer',
     tableRow: 'ReactVirtualizedDemo-tableRow',
@@ -202,6 +203,15 @@ class PageSensors extends React.Component {
         this.handleMapClose = this.handleMapClose.bind(this);
     }
 
+    componentWillUnmount(){
+        window.removeEventListener('resize',this.resizeWindow);
+        console.log("unmount");
+    }
+
+    handlePageSensors(id){
+        this.props.handleSensorPage(id);
+    }
+
     handleEdit(id) {
         console.log(id);
         fetch("/sensors/id?id=" + id, {
@@ -237,21 +247,27 @@ class PageSensors extends React.Component {
             .then(response => response.json())
             .then(data => {
                 let aux = [];
-                
+                let auxlist = [];
                 data.docs.forEach(ele => {
                     aux.push({
                         id: ele.id, name: ele.name, topic: ele.topic, actions: <React.Fragment>
                             <IconButton onClick={(e) => this.handleEdit(ele._id)} aria-label="editar">
                                 <EditIcon />
                             </IconButton>
+                            <IconButton onClick={(e)=> this.handlePageSensors(ele._id)} aria-label="Data">
+                                <TableChartIcon />
+                            </IconButton>
                             <IconButton aria-label="eliminar">
                                 <DeleteIcon />
                             </IconButton>
                         </React.Fragment>
                     });
+                    if(ele.latitud_value != null && ele.latitud_value != null ){
+                        auxlist.push(ele);
+                    }
 
                 });
-                this.setState({ listSensor: aux,listSensors: data.docs });
+                this.setState({ listSensor: aux,listSensors: auxlist });
             }).catch((err) => {
                 this.setState({ listSensor: [] });
                 console.log(err);
@@ -337,7 +353,6 @@ class PageSensors extends React.Component {
         console.log(this.tablavirtual.current);
         if (!this.state.mapopen) {
             this.setState({ columna: this.tablavirtual.current.offsetWidth / 4 });
-
         }
     }
 

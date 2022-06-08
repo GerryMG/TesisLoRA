@@ -76,23 +76,23 @@ class PageSensorsCreate extends React.Component {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="access_key"
-                        label="Access key"
-                        type="email"
+                        id="latitud_value"
+                        label="Latitud"
+                        
                         fullWidth
                         variant="standard"
-                        value={this.props.sensor.access_key}
+                        value={this.props.sensor.latitud_value}
                         onChange={this.props.handleChange}
                     />
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="access_token"
-                        label="Access token"
-                        type="email"
+                        id="longitud_value"
+                        label="Longitud"
+                        
                         fullWidth
                         variant="standard"
-                        value={this.props.sensor.access_token}
+                        value={this.props.sensor.longitud_value}
                         onChange={this.props.handleChange}
                     />
                 </DialogContent>
