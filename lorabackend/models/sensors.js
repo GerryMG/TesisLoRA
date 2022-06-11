@@ -15,7 +15,7 @@ var sensorSchema = new Schema(
         id_field: { type: String },
     }
 );
-
+// meta: [["code","id"],["celcius","m"],["estado.on","b"]]
 // {
 //     time: "tiempo or -1",
 //     ...

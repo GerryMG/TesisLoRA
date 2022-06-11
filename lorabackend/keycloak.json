@@ -4,7 +4,7 @@
   "ssl-required": "external",
   "resource": "BackendLora",
   "credentials": {
-    "secret": "C4ZRAHTYhmqPMrZSfCKWiBEXJ0RR2qd8"
+    "secret": "XqUdGe5WkyceNSiM6Hl8V08Vmm0JnfoO"
   },
   "confidential-port": 0
 }
