@@ -43,5 +43,5 @@
     "not dead",
     "not op_mini all"
   ],
-  "proxy": "http://127.0.0.1:3003"
+  "proxy": "http://127.0.0.1:3001"
 }

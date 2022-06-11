@@ -1,0 +1,31 @@
+{
+    "_id": {
+        "$oid": "62994128ddbe233a7ef2843b"
+    },
+    "name": "Sensor 01",
+    "id": "office-hq",
+    "meta": [
+        [
+            "dev_id",
+            "id"
+        ],
+        [
+            "payload_fields.light",
+            "m"
+        ],
+        [
+            "payload_fields.celcius",
+            "m"
+        ],
+        [
+            "payload_fields.state.on",
+            "b"
+        ]
+    ],
+    "topic": "v3/tesis@studentuca/devices/office-hq/join",
+    "category": "custom 01",
+    "id_field": "dev_id",
+    "__v": 0,
+    "latitud_value": 13.680544,
+    "longitud_value": -89.235803
+}

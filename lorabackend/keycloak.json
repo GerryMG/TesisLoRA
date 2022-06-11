@@ -1,6 +1,6 @@
 {
   "realm": "LoRa",
-  "auth-server-url": "http://localhost:8080/",
+  "auth-server-url": "http://192.168.56.1:8080/",
   "ssl-required": "external",
   "resource": "BackendLora",
   "credentials": {
