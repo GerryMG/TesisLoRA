@@ -53,6 +53,7 @@ class Graphics extends React.Component {
             this.state.metricas.forEach(e => {
 
             });
+            console.log(dt);
         }
     }
 

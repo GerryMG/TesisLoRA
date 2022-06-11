@@ -34,9 +34,9 @@ app.use(session({
 
 app.use(keycloak.keycloak.middleware());
 
-app.use('/', indexRouter);
-app.use('/sensors', sensorRouter);
-app.use('/data', dataRouter);
+// app.use('/', keycloak.keycloak.protect(['realm:AdminLora']),indexRouter);
+app.use('/sensors',keycloak.keycloak.protect('realm:AdminLora'), sensorRouter);
+app.use('/data',keycloak.keycloak.protect('realm:AdminLora'), dataRouter);
 
 console.debug(`${MQTT_URL} ${MQTT_PROTOCOL} ${MQTT_USERNAME} ${MQTT_PASS}`);
 const mqtt = require('mqtt');
