@@ -7,7 +7,7 @@ const sensors = new sensorsController();
 router.get("/", sensors.getAll);
 router.get("/id", sensors.getOneById);
 router.post("/", sensors.create2);
-router.delete("/", sensors.delete);
+router.delete("/", sensors.delete2);
 router.put("/", sensors.update2);
 router.put("/upsert", sensors.updateOrCreate);
 

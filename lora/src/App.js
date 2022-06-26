@@ -38,6 +38,7 @@ class App extends React.Component {
         onTokens={({ token }) => {
           // dispatch(setToken(token));
           console.log("yeah token");
+          window.token = token;
           console.log(token);
         }}
         initOptions={{ onLoad: 'login-required' }}>

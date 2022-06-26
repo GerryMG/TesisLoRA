@@ -34,6 +34,8 @@ class Graphics extends React.Component {
             data: [],
             time1: new Date(new Date().getTime() - (3 * 60 * 60 * 1000)),
             time2: new Date(),
+            id: null,
+            field: null,
             realtime: true
         }
         this.handleTime1 = this.handleTime1.bind(this);
@@ -72,7 +74,8 @@ class Graphics extends React.Component {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.token
             },
 
         })
@@ -116,7 +119,8 @@ class Graphics extends React.Component {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.token
             },
 
         })
@@ -145,6 +149,7 @@ class Graphics extends React.Component {
                     booleanos: auxbools
                 });
                 console.log(this.state.booleanos);
+                this.setState({ id: data.docs.id, field: data.docs.id_field });
                 this.getDataSensor(data.docs.id, data.docs.id_field);
             }).catch((err) => {
 
@@ -152,14 +157,16 @@ class Graphics extends React.Component {
     }
 
     handleCheck() {
-        this.setState({ realtime: !this.state.realtime })
+        this.setState({ realtime: !this.state.realtime });
     }
 
     handleTime1(e) {
         this.setState({ time1: e })
+        this.getDataSensor(this.state.id, this.state.field);
     }
     handleTime2(e) {
         this.setState({ time2: e })
+        this.getDataSensor(this.state.id, this.state.field);
     }
 
     render() {

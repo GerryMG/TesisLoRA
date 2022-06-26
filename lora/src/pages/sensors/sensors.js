@@ -191,7 +191,7 @@ class PageSensors extends React.Component {
         this.state.columna = 200;
         this.state.dialogOpen = false;
         this.state.listSensor = [];
-        this.state.listSensors= [];
+        this.state.listSensors = [];
         this.state.mapopen = false;
 
         this.handleChange = this.handleChange.bind(this);
@@ -201,14 +201,15 @@ class PageSensors extends React.Component {
         this.getAllSensor = this.getAllSensor.bind(this);
         this.handleMapOpen = this.handleMapOpen.bind(this);
         this.handleMapClose = this.handleMapClose.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
-    componentWillUnmount(){
-        window.removeEventListener('resize',this.resizeWindow);
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.resizeWindow);
         console.log("unmount");
     }
 
-    handlePageSensors(id){
+    handlePageSensors(id) {
         this.props.handleSensorPage(id);
     }
 
@@ -218,7 +219,8 @@ class PageSensors extends React.Component {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.token
             },
 
         })
@@ -235,13 +237,41 @@ class PageSensors extends React.Component {
 
             });
     }
+    delete(id) {
+        let text = "Está a punto de borrar el sensor";
+        if (window.confirm(text) == true) {
+            console.log(id);
+            let body = { id: id }
+            fetch("/sensors", {
+                method: 'DELETE',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.token
+                },
+                body: JSON.stringify(body)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                }).catch((err) => {
+
+                    console.log(err);
+
+                });
+            this.getAllSensor();
+        }
+
+    }
 
     getAllSensor() {
+        console.log(window.token);
         fetch("/sensors", {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.token
             },
         })
             .then(response => response.json())
@@ -254,20 +284,20 @@ class PageSensors extends React.Component {
                             <IconButton onClick={(e) => this.handleEdit(ele._id)} aria-label="editar">
                                 <EditIcon />
                             </IconButton>
-                            <IconButton onClick={(e)=> this.handlePageSensors(ele._id)} aria-label="Data">
+                            <IconButton onClick={(e) => this.handlePageSensors(ele._id)} aria-label="Data">
                                 <TableChartIcon />
                             </IconButton>
-                            <IconButton aria-label="eliminar">
+                            <IconButton onClick={(e) => this.delete(ele._id)} aria-label="eliminar">
                                 <DeleteIcon />
                             </IconButton>
                         </React.Fragment>
                     });
-                    if(ele.latitud_value != null && ele.latitud_value != null ){
+                    if (ele.latitud_value != null && ele.latitud_value != null) {
                         auxlist.push(ele);
                     }
 
                 });
-                this.setState({ listSensor: aux,listSensors: auxlist });
+                this.setState({ listSensor: aux, listSensors: auxlist });
             }).catch((err) => {
                 this.setState({ listSensor: [] });
                 console.log(err);
@@ -294,7 +324,8 @@ class PageSensors extends React.Component {
                 method: 'PUT',
                 credentials: 'same-origin',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.token
                 },
                 body: JSON.stringify(bod)
             })
@@ -302,6 +333,7 @@ class PageSensors extends React.Component {
                 .then(data => {
                     this.setState({ dialogOpen: false, sensor: newSensor });
                     console.log(data);
+                    this.getAllSensor();
                 }).catch((err) => {
                     this.setState({ sensor: newSensor });
                     console.log(err);
@@ -315,7 +347,8 @@ class PageSensors extends React.Component {
                 method: 'POST',
                 credentials: 'same-origin',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + window.token
                 },
                 body: JSON.stringify(bod)
             })
@@ -323,12 +356,14 @@ class PageSensors extends React.Component {
                 .then(data => {
                     this.setState({ dialogOpen: false, sensor: newSensor });
                     console.log(data);
+                    this.getAllSensor();
                 }).catch((err) => {
                     this.setState({ sensor: newSensor });
                     console.log(err);
 
                 });
         }
+        this.getAllSensor();
     }
 
     handleDialogOpen() {
@@ -380,7 +415,7 @@ class PageSensors extends React.Component {
                     </Fab>
                 </Tooltip>
 
-                {this.state.mapopen ? <PageSensorsMap list={this.state.listSensors}/> :
+                {this.state.mapopen ? <PageSensorsMap list={this.state.listSensors} /> :
                     <Paper style={{ height: 'calc(100% - 78px)', width: '100%' }} ref={this.tablavirtual}>
                         <VirtualizedTable
 
