@@ -4,7 +4,8 @@ export const globalTitles = {
 }
 export const globalPages = {
     sensors: 1,
-    reportSensor: 2
+    reportSensor: 2,
+    Monitor: 3
     
 }
 

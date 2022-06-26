@@ -34,6 +34,7 @@ import { globalPages, globalTitles } from '../global';
 import PageSensors from '../sensors/sensors';
 import Graphics from '../reports/graphics'
 import { height } from '@mui/system';
+import Monitor from '../reports/monitor';
 
 function Copyright(props) {
   return (
@@ -112,10 +113,16 @@ class DashboardContent extends React.Component {
     this.setPage = this.setPage.bind(this);
     this.setTitle = this.setTitle.bind(this);
     this.setSensors=this.setSensors.bind(this);
+    this.pageMonitor=this.pageMonitor.bind(this);
   }
 
   pageSensors(id){
     this.setPage(globalPages.reportSensor);
+    this.setState({sensor: id});
+  }
+
+  pageMonitor(id){
+    this.setPage(globalPages.Monitor);
     this.setState({sensor: id});
   }
 
@@ -140,10 +147,14 @@ class DashboardContent extends React.Component {
     if (page == globalPages.sensors) {
       return (<PageSensors
         handleSensorPage={this.pageSensors} 
+        handleMonitorPage={this.pageMonitor}
         open={this.state.open} />);
     }
     if(page == globalPages.reportSensor){
       return (<Graphics setTitle={this.setTitle} id={this.state.sensor}/>);
+    }
+    if(page == globalPages.Monitor){
+      return (<Monitor setTitle={this.setTitle} id={this.state.sensor}/>);
     }
   }
 

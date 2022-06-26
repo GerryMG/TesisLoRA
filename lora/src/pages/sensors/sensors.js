@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import AirplayIcon from '@mui/icons-material/Airplay';
 import IconButton from '@mui/material/IconButton';
 import PageSensorsCreate from './sensorCreate';
 import { newSensor, urls } from '../global';
@@ -201,6 +202,7 @@ class PageSensors extends React.Component {
         this.getAllSensor = this.getAllSensor.bind(this);
         this.handleMapOpen = this.handleMapOpen.bind(this);
         this.handleMapClose = this.handleMapClose.bind(this);
+        
         this.delete = this.delete.bind(this);
     }
 
@@ -211,6 +213,10 @@ class PageSensors extends React.Component {
 
     handlePageSensors(id) {
         this.props.handleSensorPage(id);
+    }
+
+    handlePageMonitor(id) {
+        this.props.handleMonitorPage(id);
     }
 
     handleEdit(id) {
@@ -286,6 +292,9 @@ class PageSensors extends React.Component {
                             </IconButton>
                             <IconButton onClick={(e) => this.handlePageSensors(ele._id)} aria-label="Data">
                                 <TableChartIcon />
+                            </IconButton>
+                            <IconButton onClick={(e) => this.handlePageMonitor(ele._id)} aria-label="Monitor">
+                                <AirplayIcon />
                             </IconButton>
                             <IconButton onClick={(e) => this.delete(ele._id)} aria-label="eliminar">
                                 <DeleteIcon />
