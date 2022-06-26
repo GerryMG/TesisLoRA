@@ -214,7 +214,7 @@ class Graphics extends React.Component {
 
                         <Typography sx={{ fontSize: 22 }}
                             flexDirection="column" alignContent="center" color="text.secondary" gutterBottom>
-                            {ele}  <Switch {...label} disabled color='primary' checked={this.state.booleanos[ele].value} />
+                            {ele}  <Switch {...label} disabled color='primary' checked={this.state.booleanos[ele]} />
                         </Typography>
 
 

@@ -194,34 +194,29 @@ class Monitor extends React.Component {
         return (
             <React.Fragment>
 
+
                 <Box sx={{
                     padding: '10px',
-                    marginLeft: '20px'
+                    display: "flex"
                 }}>
                     {Object.keys(this.state.booleanos).map(ele =>
-                    (<div sx={{
-                        maxWidth: '125px', height: '75px', display: 'flex',
-                        justifyContent: 'center', flexDirection: 'column'
-                    }} key={this.state.booleanos[ele].key}>
+                    (<Card sx={{ width: '45%', heigth: '550px', paddingTop: '10px', margin: "10px",
+                backgroundColor: this.state.booleanos[ele] ?  'lightgreen' : '#FFCCCB' }}
+                        key={this.state.booleanos[ele].key}>
+                        <CardContent>
+                            <Typography variant="h1" component="div"
+                            >
+                                {ele}
+                            </Typography>
+                        </CardContent>
 
-                        <Typography sx={{ fontSize: 22 }}
-                            flexDirection="column" alignContent="center" color="text.secondary" gutterBottom>
-                            {ele}  <Switch {...label} disabled color='primary' checked={this.state.booleanos[ele].value} />
-                        </Typography>
-
-
-                    </div>
+                    </Card>
                     )
                     )
 
                     }
-                </Box>
-                <Box sx={{
-                    padding: '10px'
-
-                }}>
                     {this.state.data.map((dta, i) => (
-                        <Card key={i} sx={{ width: '50%', heigth: '550px', paddingTop: '40px', marginTop: "10px" }}>
+                        <Card key={i} sx={{ width: '45%', heigth: '550px', paddingTop: '10px', margin: "10px" }}>
                             <CardContent>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     {this.state.metricas[i].split(".").at(-1)}
