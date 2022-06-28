@@ -17,13 +17,20 @@ b68dc9e83551   quay.io/keycloak/keycloak:latest   "/opt/keycloak/bin/k…"   2 w
 cc4bb1981974   mongo                              "docker-entrypoint.s…"   2 weeks ago   Up 5 hours   0.0.0.0:27017->27017/tcp                                   tesis-mongo-1
 29f51a881b64   eclipse-mosquitto:latest           "/docker-entrypoint.…"   2 weeks ago   Up 5 hours   0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp             mosquitto
 ```
-5. Go to the lorabackend directory and execute
+5. Go to [http://localhost:8080](http://localhost:8080 "http://localhost:8080") and log into the admin console with your credentials
+
+6. Import the realm-export.json into keycloak
+
+7. Fix the urls and set yours inside reactlora Client if is necesary. 
+
+8. Create a user, and give both admin roles that exist in the keycloak realms roles page. 
+
+9. Go to the lorabackend directory and execute
 ```bash
 npm install
 npm start
 ```
-
-5. Now, go to the lora directory and change the proxy json ip in the package.json to your ip.
+10. Now, go to the lora directory and change the proxy json ip in the package.json to your ip.
 ```json
 {
   "browserslist": [
