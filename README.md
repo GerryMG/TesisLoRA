@@ -21,7 +21,7 @@ cc4bb1981974   mongo                              "docker-entrypoint.s…"   2 w
 
 6. Import the realm-export.json into keycloak
 
-7. Fix the urls and set yours inside reactlora Client if is necesary. 
+7. Fix the urls and set yours inside reactlora Client if it's necesary. 
 
 8. Create a user, and give both admin roles that exist in the keycloak realms roles page. 
 
